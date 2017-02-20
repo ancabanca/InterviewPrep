@@ -1,9 +1,10 @@
+import java.util.Scanner;
+
 /**
  * Generic queue implemented with an underlying linked list.
  * Time complexity: O(1) for enqueue, dequeue
  * Space complexity: O(N)
  */
-
 public class LinkedListQueue<T> {
     private Node head;
     private Node tail;
@@ -54,5 +55,18 @@ public class LinkedListQueue<T> {
     private class Node {
         public T value;
         public Node next;
+    }
+
+    public static void main(String[] args) {
+        LinkedListQueue<String> q = new LinkedListQueue<String>();
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            String s = scanner.next();
+            if(s.equals("-"))
+                q.dequeue();
+            else
+                q.enqueue(s);
+        }
+        System.out.println(q);
     }
 }

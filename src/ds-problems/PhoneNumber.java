@@ -79,4 +79,13 @@ public class PhoneNumber {
         if (value < 0 || value > max)
             throw new IllegalArgumentException(name + ": " + value);
     }
+
+    public static void main(String[] args) {
+        PhoneNumber pn1 = new PhoneNumber(206, 555, 4121);
+        PhoneNumber pn2 = PhoneNumber.getInstance("206-555-4121");
+        PhoneNumber pn3 = PhoneNumber.getInstance("206-555-5176");
+        System.out.println(pn1 + (pn1.equals(pn2) ? " == " : " != ") + pn2);
+        System.out.println(pn2 + (pn2.equals(pn3) ? " == " : " != ") + pn3);
+        System.out.println(pn3 + (pn3.equals(pn1) ? " == " : " != ") + pn1);
+    }
 }

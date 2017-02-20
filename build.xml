@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<project name="Ant-Test" default="main" basedir=".">
+    <!-- Sets variables which can later be used. -->
+    <!-- The value of a property is accessed via ${} -->
+    <property name="main.src.dir" value="src" />
+    <property name="test.src.dir" value="test" />
+    <property name="main.build.dir" value="build/main" />
+    <property name="test.build.dir" value="build/test" />
+    
+    <property name="lib.dir" value="lib" />
+    <property name="dist.dir" value="dist" />
+    <property name="docs.dir" value="docs" />
+
+    <!-- Defines paths for build, test and runtime -->
+    <path id="build.classpath">
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar" />
+        </fileset>
+        <pathelement location="lib/junit.jar" />
+    </path>
+
+    <path id="test.classpath">
+        <pathelement location="lib/junit-4.12.jar" />
+        <pathelement location="lib/hamcrest-core-1.3.jar" />
+        <pathelement location="${main.build.dir}" />
+        <pathelement location="${test.build.dir}" />
+    </path>
+    
+    <path id="runtime.classpath">
+        <pathelement location="${main.build.dir}" />
+    </path>
+
+    <!-- Deletes the existing build, docs and dist directory-->
+    <target name="clean">
+        <delete dir="${main.build.dir}" />
+        <delete dir="${test.build.dir}" />
+        <delete dir="${docs.dir}" />
+        <delete dir="${dist.dir}" />
+    </target>
+
+    <!-- Creates the  build, docs and dist directory-->
+    <target name="makedir">
+        <mkdir dir="${main.build.dir}" />
+        <mkdir dir="${docs.dir}" />
+        <mkdir dir="${dist.dir}" />
+    </target>
+
+    <!-- Compiles the java code (including the usage of library for JUnit) -->
+    <target name="compile" depends="clean,makedir">
+        <javac srcdir="${main.src.dir}" destdir="${main.build.dir}" includeantruntime="false" classpathref="test.classpath">
+        </javac>
+    </target>
+
+    <target name="build" depends="compile">
+        <mkdir dir="${test.build.dir}" />
+        <javac srcdir="${test.src.dir}" destdir="${test.build.dir}" includeantruntime="false">
+            <classpath refid="test.classpath" />
+        </javac>
+    </target>
+
+    <target name="test" depends="build">
+        <junit printsummary="on" haltonfailure="yes">
+            <classpath>
+                <path refid="test.classpath" />
+            </classpath>
+            <formatter type="brief" usefile="false" />
+            <batchtest>
+                <fileset dir="${test.src.dir}">
+                    <include name="**/*Test*.java" />
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <!-- Creates Javadoc -->
+    <target name="docs" depends="compile">
+        <javadoc packagenames="src" sourcepath="${main.src.dir}" destdir="${docs.dir}" classpathref="test.classpath">
+            <!-- Define which files / directory should get included, we include all -->
+            <fileset dir="${main.src.dir}">
+                <include name="**" />
+            </fileset>
+        </javadoc>
+    </target>
+
+    <!--Creates the deployable jar file  -->
+    <target name="jar" depends="compile">
+        <jar destfile="${dist.dir}\application.jar" basedir="${main.build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="Selection.main" />
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="main" depends="compile, jar, docs">
+        <description>Main target</description>
+        <java classname="Selection" classpathref="runtime.classpath">
+        </java>
+    </target>
+</project>

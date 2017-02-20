@@ -5,7 +5,8 @@ import java.util.List;
  * Queue implemented with two stacks, so that each queue operation
  * takes a constant amortized number of stack operations.
  * NOTE: Java arrays are covariant but Java generics are not: that is,
- * 𝚂𝚝𝚛𝚒𝚗𝚐[] is a subtype of 𝙾𝚋𝚓𝚎𝚌𝚝[], but 𝚂𝚝𝚊𝚌𝚔<𝚂𝚝𝚛𝚒𝚗𝚐> is not a subtype of 𝚂𝚝𝚊𝚌𝚔<𝙾𝚋𝚓𝚎𝚌𝚝>.
+ * String[] is a subtype of Object[], but {@literal Stack<String>} 
+ * is not a subtype of {@literal Stack<Object>}.
  */
 public class TwoStackQueue<T> {
     private ArrayStack<T> pushStack;

@@ -11,6 +11,7 @@ public class ArithmeticExpression {
 
     /**
      * Dijkstra's algorithm for evaluating an arithmetic expression.
+     * @return the value obtained after evaluating the current arithmetic expression
      */
     public int evaluate() {
         Stack<Integer> valueStack = new LinkedListStack<Integer>();

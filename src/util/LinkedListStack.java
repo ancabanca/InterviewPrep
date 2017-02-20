@@ -1,11 +1,10 @@
+import java.util.Iterator;
+
 /**
  * Generic stack implemented as a linked list.
  * Time complexity: O(1) for every operation
  * Space complexity: O(N)
 */
-
-import java.util.Iterator;
-
 public class LinkedListStack<T> implements Stack<T>, Iterable<T> {
     private Node head = null;
     private int size;
@@ -41,6 +40,23 @@ public class LinkedListStack<T> implements Stack<T>, Iterable<T> {
         return new LinkedListIterator();
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public boolean equals(Object other) {
+        if(other == null)
+            return false;
+        if(!(other instanceof LinkedListStack))
+            return false;
+        LinkedListStack<T> that = (LinkedListStack<T>)other;
+        Iterator it1 = this.iterator();
+        Iterator it2 = that.iterator();
+        while(it1.hasNext() && it2.hasNext())
+            if(!it1.next().equals(it2.next()))
+                return false;
+        return true;
+    }
+
+    @Override
     public String toString() {
         String s = "";
         for (T element : this)
