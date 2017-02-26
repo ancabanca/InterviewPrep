@@ -1,3 +1,5 @@
+package com.github.ancabanca.interviewprep.problems;
+
 public class PhoneNumber {
     // I tried to declare these as short, but then everytime I passed an int literal
     //  as argument, it needed explicit casting, which is a pain. Surprising that

@@ -1,3 +1,5 @@
+package com.github.ancabanca.interviewprep.util;
+
 /**
  * Generic stack implemented with an underlying resizing array.
  * Time complexity: O(1) amortized, O(n) worst case when resizing

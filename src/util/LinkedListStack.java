@@ -1,3 +1,5 @@
+package com.github.ancabanca.interviewprep.util;
+
 import java.util.Iterator;
 
 /**

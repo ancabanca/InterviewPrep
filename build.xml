@@ -91,9 +91,8 @@
         </jar>
     </target>
 
-    <target name="main" depends="compile, jar, docs">
+    <target name="main" depends="compile, jar, docs, test">
         <description>Main target</description>
-        <java classname="Selection" classpathref="runtime.classpath">
-        </java>
+        <!-- <java classname="RegexTest" classpathref="runtime.classpath" /> -->
     </target>
 </project>

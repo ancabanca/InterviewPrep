@@ -1,3 +1,5 @@
+package com.github.ancabanca.interviewprep.problems;
+
 import java.util.Arrays;
 
 /**

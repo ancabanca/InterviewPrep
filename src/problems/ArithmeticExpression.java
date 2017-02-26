@@ -1,3 +1,8 @@
+package com.github.ancabanca.interviewprep.problems;
+
+import com.github.ancabanca.interviewprep.util.Stack;
+import com.github.ancabanca.interviewprep.util.LinkedListStack;
+
 public class ArithmeticExpression {
     private String expression;
 

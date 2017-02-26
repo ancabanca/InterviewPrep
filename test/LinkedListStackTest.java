@@ -2,6 +2,9 @@ import java.util.Scanner;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import com.github.ancabanca.interviewprep.util.Stack;
+import com.github.ancabanca.interviewprep.util.LinkedListStack;
+
 public class LinkedListStackTest {
 
     @Test

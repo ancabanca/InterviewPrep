@@ -1,6 +1,8 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import com.github.ancabanca.interviewprep.problems.ArithmeticExpression;
+
 public class ArithmeticExpressionTest {
     
     @Test
