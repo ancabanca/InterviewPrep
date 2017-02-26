@@ -1,5 +1,8 @@
 package com.github.ancabanca.interviewprep.util;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * Generic stack implemented with an underlying resizing array.
  * Time complexity: O(1) amortized, O(n) worst case when resizing
@@ -9,9 +12,6 @@ package com.github.ancabanca.interviewprep.util;
  * However, you may not want to resize your array when your planes are landing,
  * so having a constant worst time is important :)
  */
-
-import java.util.Iterator;
-
 public class ArrayStack<T> implements Stack<T>, Iterable<T> {
     private T[] array;
     private int N = 0;
@@ -56,10 +56,10 @@ public class ArrayStack<T> implements Stack<T>, Iterable<T> {
 
     @Override
     public String toString() {
-        String s = "[ArrayStack]: ";
+        StringBuilder sb = new StringBuilder("[ArrayStack]: ");
         for (T element : this)
-            s = s + element.toString() + " ";
-        return s;
+            sb.append(element.toString() + " ");
+        return new String(sb);
     }
 
     @SuppressWarnings("unchecked") // the ugly cast warning
@@ -78,7 +78,10 @@ public class ArrayStack<T> implements Stack<T>, Iterable<T> {
         }
 
         public T next() {
-            return array[current++];
+            if(hasNext())
+                return array[current++];
+            else
+                throw new NoSuchElementException();
         }
 
     }

@@ -1,12 +1,12 @@
-import org.junit.Test;
 import static org.junit.Assert.*;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Random;
-
 import com.github.ancabanca.interviewprep.problems.SocialNetwork;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Random;
+import org.junit.Test;
 
 public class SocialNetworkTest {
 
@@ -19,18 +19,18 @@ public class SocialNetworkTest {
 
     private void generateTestFile(String filename) {
         try {
-            FileWriter fw = new FileWriter(filename);
+            OutputStreamWriter fw = new OutputStreamWriter(new FileOutputStream(filename), "utf-8");
             int range = 10;
 
             Random r = new Random();
-            int N = r.nextInt(range) + range; // e.g. 1000 <= N < 2000;
-            fw.write(N + "\n");
-            for(int i = 0; i < 3*N; i++) {
-                int x = r.nextInt(N);
-                int y = r.nextInt(N);
+            int n = r.nextInt(range) + range; // e.g. 1000 <= N < 2000;
+            fw.write(n + "\n");
+            for(int i = 0; i < 3*n; i++) {
+                int x = r.nextInt(n);
+                int y = r.nextInt(n);
                 if(x == y)
                     continue;
-                fw.write(String.format("%d\t%d\t%d\n", i, x, y));
+                fw.write(String.format("%d\t%d\t%d%n", i, x, y));
             }
             fw.close();
         }

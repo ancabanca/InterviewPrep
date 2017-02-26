@@ -44,14 +44,13 @@ public class LinkedListQueue<T> {
     }
 
     public String toString() {
-        String s = "[LinkedListQueue]: ";
+        StringBuilder sb = new StringBuilder("[LinkedListQueue]: ");
         Node h = head;
         while(h != null) {
-            s += h.value;
-            s += " ";
+            sb.append(h.value + " ");
             h = h.next;
         }
-        return s;
+        return new String(sb);
     }
 
     private class Node {
@@ -61,7 +60,7 @@ public class LinkedListQueue<T> {
 
     public static void main(String[] args) {
         LinkedListQueue<String> q = new LinkedListQueue<String>();
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in,"utf-8");
         while (scanner.hasNext()) {
             String s = scanner.next();
             if(s.equals("-"))

@@ -1,8 +1,8 @@
 package com.github.ancabanca.interviewprep.problems;
 
-import java.util.Arrays;
-
 import com.github.ancabanca.interviewprep.util.UnionFind;
+
+import java.util.Arrays;
 
 /**
  *  Union Find data structure with operation find(i), which returns

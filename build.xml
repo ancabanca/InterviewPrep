@@ -1,17 +1,22 @@
 <?xml version="1.0"?>
 <project name="Ant-Test" default="main" basedir=".">
-    <!-- Sets variables which can later be used. -->
-    <!-- The value of a property is accessed via ${} -->
-    <property name="main.src.dir" value="src" />
-    <property name="test.src.dir" value="test" />
+
+    <!-- ###################################################
+        Variable names
+        ################################################### -->
+    <property name="main.src.dir"   value="src" />
+    <property name="test.src.dir"   value="test" />
     <property name="main.build.dir" value="build/main" />
     <property name="test.build.dir" value="build/test" />
-    
-    <property name="lib.dir" value="lib" />
+    <property name="findbugs.dir"  value="lib/findbugs-3.0.1"/>
+
+    <property name="lib.dir"  value="lib" />
     <property name="dist.dir" value="dist" />
     <property name="docs.dir" value="docs" />
 
-    <!-- Defines paths for build, test and runtime -->
+    <!-- ###################################################
+        Paths
+        ################################################### -->
     <path id="build.classpath">
         <fileset dir="${lib.dir}">
             <include name="**/*.jar" />
@@ -30,7 +35,9 @@
         <pathelement location="${main.build.dir}" />
     </path>
 
-    <!-- Deletes the existing build, docs and dist directory-->
+    <!-- ###################################################
+        Clean and create directories
+        ################################################### -->
     <target name="clean">
         <delete dir="${main.build.dir}" />
         <delete dir="${test.build.dir}" />
@@ -38,27 +45,61 @@
         <delete dir="${dist.dir}" />
     </target>
 
-    <!-- Creates the  build, docs and dist directory-->
     <target name="makedir">
         <mkdir dir="${main.build.dir}" />
+        <mkdir dir="${test.build.dir}" />
         <mkdir dir="${docs.dir}" />
         <mkdir dir="${dist.dir}" />
     </target>
 
-    <!-- Compiles the java code (including the usage of library for JUnit) -->
+    <!-- ###################################################
+        Compiles source code and tests
+        ################################################### -->
     <target name="compile" depends="clean,makedir">
-        <javac srcdir="${main.src.dir}" destdir="${main.build.dir}" includeantruntime="false" classpathref="test.classpath">
+        <javac srcdir="${main.src.dir}" destdir="${main.build.dir}"
+            includeantruntime="false" classpathref="test.classpath">
+        </javac>
+
+        <javac srcdir="${test.src.dir}" destdir="${test.build.dir}"
+            includeantruntime="false" classpathref="test.classpath">
         </javac>
     </target>
 
-    <target name="build" depends="compile">
-        <mkdir dir="${test.build.dir}" />
-        <javac srcdir="${test.src.dir}" destdir="${test.build.dir}" includeantruntime="false">
-            <classpath refid="test.classpath" />
-        </javac>
+    <!-- ###################################################
+        Runs Checkstyle   http://checkstyle.sourceforge.net/anttask.html
+        ################################################### -->
+    <target name="checkstyle" depends="compile">
+        <taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties"
+                 classpath="lib/checkstyle-7.6-all.jar"/> 
+
+        <checkstyle config="checkstyle-config.xml">
+            <fileset dir="${main.src.dir}" includes="**/*.java"/>
+            <fileset dir="${test.src.dir}" includes="**/*.java"/>
+        </checkstyle>
     </target>
 
-    <target name="test" depends="build">
+    <!-- ###################################################
+        Runs FindBugs   http://findbugs.sourceforge.net/manual/anttask.html
+        ################################################### -->
+    <target name="findbugs" depends="compile">
+        <taskdef name="findbugs"
+                classname="edu.umd.cs.findbugs.anttask.FindBugsTask"
+                classpath="${findbugs.dir}/lib/findbugs-ant.jar"/>
+        <findbugs home="${findbugs.dir}"
+                    output="html"
+                    outputFile="findbugs.html" >
+            <auxClasspath>
+                <fileset file="lib/junit-4.12.jar" />
+            </auxClasspath>
+            <class location="${main.build.dir}" />
+            <class location="${test.build.dir}" />
+        </findbugs>
+    </target>
+
+    <!-- ###################################################
+        Runs tests
+        ################################################### -->
+    <target name="test" depends="compile, checkstyle, findbugs">
         <junit printsummary="on" haltonfailure="yes">
             <classpath>
                 <path refid="test.classpath" />
@@ -72,7 +113,9 @@
         </junit>
     </target>
 
-    <!-- Creates Javadoc -->
+    <!-- ###################################################
+        Creates Javadoc 
+        ################################################### -->
     <target name="docs" depends="compile">
         <javadoc packagenames="src" sourcepath="${main.src.dir}" destdir="${docs.dir}" classpathref="test.classpath">
             <!-- Define which files / directory should get included, we include all -->
@@ -82,7 +125,9 @@
         </javadoc>
     </target>
 
-    <!--Creates the deployable jar file  -->
+    <!-- ###################################################
+        Creates the deployable jar file
+        ################################################### -->
     <target name="jar" depends="compile">
         <jar destfile="${dist.dir}\application.jar" basedir="${main.build.dir}">
             <manifest>
@@ -91,7 +136,10 @@
         </jar>
     </target>
 
-    <target name="main" depends="compile, jar, docs, test">
+    <!-- ###################################################
+        Main target
+        ################################################### -->
+    <target name="main" depends="test, jar, docs">
         <description>Main target</description>
         <!-- <java classname="RegexTest" classpathref="runtime.classpath" /> -->
     </target>

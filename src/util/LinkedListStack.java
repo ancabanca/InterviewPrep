@@ -1,6 +1,7 @@
 package com.github.ancabanca.interviewprep.util;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Generic stack implemented as a linked list.
@@ -59,6 +60,12 @@ public class LinkedListStack<T> implements Stack<T>, Iterable<T> {
     }
 
     @Override
+    public int hashCode() {
+        assert false : "hashCode not designed";
+        return 42;
+    }
+
+    @Override
     public String toString() {
         String s = "";
         for (T element : this)
@@ -82,8 +89,12 @@ public class LinkedListStack<T> implements Stack<T>, Iterable<T> {
         @Override
         public T next() {
             Node result = current;
-            current = current.next;
-            return result.value;
+            if(hasNext()) {
+                current = current.next;
+                return result.value;
+            }
+            else
+                throw new NoSuchElementException();
         }
 
         @Override

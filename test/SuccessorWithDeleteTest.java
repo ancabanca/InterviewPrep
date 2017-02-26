@@ -1,7 +1,7 @@
-import org.junit.Test;
 import static org.junit.Assert.*;
 
 import com.github.ancabanca.interviewprep.problems.SuccessorWithDelete;
+import org.junit.Test;
 
 public class SuccessorWithDeleteTest {
     SuccessorWithDelete s = new SuccessorWithDelete(8);

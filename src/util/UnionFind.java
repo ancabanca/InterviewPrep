@@ -48,10 +48,11 @@ public class UnionFind {
     }
 
     protected int root(int p) {
-        while(p != parent[p]) {
-            parent[p] = parent[parent[p]]; // path compression
-            p = parent[p];
+        int q = p;
+        while(q != parent[q]) {
+            parent[q] = parent[parent[q]]; // path compression
+            q = parent[q];
         }
-        return p;
+        return q;
     }
 }

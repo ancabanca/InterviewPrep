@@ -1,7 +1,7 @@
-import org.junit.Test;
 import static org.junit.Assert.*;
 
 import com.github.ancabanca.interviewprep.problems.UnionFindCanonicalElement;
+import org.junit.Test;
 
 public class UnionFindCanonicalElementTest {
     @Test

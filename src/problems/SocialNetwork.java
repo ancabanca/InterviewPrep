@@ -1,10 +1,10 @@
 package com.github.ancabanca.interviewprep.problems;
 
+import com.github.ancabanca.interviewprep.util.UnionFind;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
-import com.github.ancabanca.interviewprep.util.UnionFind;
 
 /** Social network connectivity. Given a social network containing n members
  * and a log file containing m timestamps at which times pairs of members 
@@ -28,9 +28,9 @@ public class SocialNetwork {
     */
     public int checkWhenConnected(String logFileName) {
         try {
-            Scanner s = new Scanner(new File(logFileName));
-            int N = Integer.parseInt(s.nextLine().trim());
-            UnionFind uf = new UnionFind(N);
+            Scanner s = new Scanner(new File(logFileName),"utf-8");
+            int n = Integer.parseInt(s.nextLine().trim());
+            UnionFind uf = new UnionFind(n);
             while(s.hasNextLine()) {
                 String[] tokens = s.nextLine().split("\t");
                 uf.union(Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]));
