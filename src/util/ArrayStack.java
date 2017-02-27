@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
  */
 public class ArrayStack<T> implements Stack<T>, Iterable<T> {
     private T[] array;
-    private int N = 0;
+    private int n = 0;
 
     @SuppressWarnings("unchecked") // the ugly cast warning
     public ArrayStack() {
@@ -24,27 +24,27 @@ public class ArrayStack<T> implements Stack<T>, Iterable<T> {
     }
 
     public boolean isEmpty() {
-        return N == 0;
+        return n == 0;
     }
 
     public int size() {
-        return N;
+        return n;
     }
 
     public void push(T s) {
-        if(N == array.length)
+        if(n == array.length)
             resizeArray(array.length * 2); // repeated doubling
-        array[N++] = s;
+        array[n++] = s;
     }
 
     public T pop() {
         if(isEmpty()) {
             throw new UnsupportedOperationException("Cannot pop from an empty stack.");
         }
-        T result = array[--N];
-        array[N] = null; // avoid loitering
+        T result = array[--n];
+        array[n] = null; // avoid loitering
         
-        if(N == array.length/4)
+        if(n == array.length/4)
             resizeArray(array.length/2);
 
         return result;
@@ -65,7 +65,7 @@ public class ArrayStack<T> implements Stack<T>, Iterable<T> {
     @SuppressWarnings("unchecked") // the ugly cast warning
     private void resizeArray(int capacity) {
         T[] newArray = (T[])new Object[capacity];
-        for(int i=0; i<N; i++)
+        for(int i=0; i<n; i++)
             newArray[i] = array[i];
         array = newArray;
     }
@@ -74,7 +74,7 @@ public class ArrayStack<T> implements Stack<T>, Iterable<T> {
         private int current = 0;
 
         public boolean hasNext() {
-            return current < N; 
+            return current < n;
         }
 
         public T next() {

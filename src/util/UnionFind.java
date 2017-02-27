@@ -10,14 +10,14 @@ public class UnionFind {
     protected int[] size;
     protected int connectedComponents;
 
-    public UnionFind(int N) {
-        parent = new int[N];
+    public UnionFind(int n) {
+        parent = new int[n];
         for(int i = 0; i < parent.length; i++)
             parent[i] = i;
-        size = new int[N];
+        size = new int[n];
         for(int i = 0; i < size.length; i++)
             size[i] = 1;
-        connectedComponents = N;
+        connectedComponents = n;
     }
 
     public boolean connected(int p, int q) {

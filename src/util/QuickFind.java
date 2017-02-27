@@ -8,8 +8,8 @@ package com.github.ancabanca.interviewprep.util;
 public class QuickFind {
     private int[] array;
 
-    public QuickFind(int N) {
-        array = new int[N];
+    public QuickFind(int n) {
+        array = new int[n];
         for(int i = 0; i < array.length; i++)
             array[i] = i;
     }

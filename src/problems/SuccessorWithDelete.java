@@ -9,8 +9,8 @@ package com.github.ancabanca.interviewprep.problems;
 public class SuccessorWithDelete {
     private UnionFindCanonicalElement uf;
 
-    public SuccessorWithDelete(int N) {
-        uf = new UnionFindCanonicalElement(N);
+    public SuccessorWithDelete(int n) {
+        uf = new UnionFindCanonicalElement(n);
     }
 
     public void delete(int i) {

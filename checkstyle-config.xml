@@ -41,11 +41,17 @@
     <module name="ParameterAssignment"/>
     <!-- Force 100L instead of 100l -->
     <module name="UpperEll"/>
+
     <!-- Import statements order -->
     <module name="CustomImportOrder">
         <property name="sortImportsInGroupAlphabetically" value="true"/>
         <property name="separateLineBetweenGroups" value="true"/>
         <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE"/>
     </module>
+    <!-- Other checks -->
+    <module name="MemberName"/>
+    <module name="ParameterName"/>
+    <module name="SimplifyBooleanExpression"/>
+    
   </module>
 </module>

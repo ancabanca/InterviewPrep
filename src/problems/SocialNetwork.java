@@ -1,7 +1,6 @@
 package com.github.ancabanca.interviewprep.problems;
 
 import com.github.ancabanca.interviewprep.util.UnionFind;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;

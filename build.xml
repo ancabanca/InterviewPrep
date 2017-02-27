@@ -21,7 +21,6 @@
         <fileset dir="${lib.dir}">
             <include name="**/*.jar" />
         </fileset>
-        <pathelement location="lib/junit.jar" />
     </path>
 
     <path id="test.classpath">
@@ -33,6 +32,7 @@
     
     <path id="runtime.classpath">
         <pathelement location="${main.build.dir}" />
+        <pathelement location="${lib.dir}/algs4.jar" />
     </path>
 
     <!-- ###################################################
@@ -57,7 +57,7 @@
         ################################################### -->
     <target name="compile" depends="clean,makedir">
         <javac srcdir="${main.src.dir}" destdir="${main.build.dir}"
-            includeantruntime="false" classpathref="test.classpath">
+            includeantruntime="false" classpathref="build.classpath">
         </javac>
 
         <javac srcdir="${test.src.dir}" destdir="${test.build.dir}"
@@ -90,6 +90,7 @@
                     outputFile="findbugs.html" >
             <auxClasspath>
                 <fileset file="lib/junit-4.12.jar" />
+                <fileset file="lib/algs4.jar" />
             </auxClasspath>
             <class location="${main.build.dir}" />
             <class location="${test.build.dir}" />
@@ -117,8 +118,7 @@
         Creates Javadoc 
         ################################################### -->
     <target name="docs" depends="compile">
-        <javadoc packagenames="src" sourcepath="${main.src.dir}" destdir="${docs.dir}" classpathref="test.classpath">
-            <!-- Define which files / directory should get included, we include all -->
+        <javadoc packagenames="src" sourcepath="${main.src.dir}" destdir="${docs.dir}" classpathref="build.classpath">
             <fileset dir="${main.src.dir}">
                 <include name="**" />
             </fileset>
@@ -139,8 +139,11 @@
     <!-- ###################################################
         Main target
         ################################################### -->
-    <target name="main" depends="test, jar, docs">
+    <target name="main" depends="test"> <!-- also: jar, docs -->
         <description>Main target</description>
-        <!-- <java classname="RegexTest" classpathref="runtime.classpath" /> -->
+        <java classname="PercolationStats" classpathref="runtime.classpath">
+            <arg value="10"/>
+            <arg value="100"/>
+        </java>
     </target>
 </project>

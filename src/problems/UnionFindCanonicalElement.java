@@ -1,7 +1,6 @@
 package com.github.ancabanca.interviewprep.problems;
 
 import com.github.ancabanca.interviewprep.util.UnionFind;
-
 import java.util.Arrays;
 
 /**
@@ -11,9 +10,9 @@ import java.util.Arrays;
 public class UnionFindCanonicalElement extends UnionFind {
     private int[] max;
 
-    public UnionFindCanonicalElement(int N) {
-        super(N);
-        max = new int[N];
+    public UnionFindCanonicalElement(int n) {
+        super(n);
+        max = new int[n];
         for(int i = 0; i < max.length; i++)
             max[i] = i;
     }
