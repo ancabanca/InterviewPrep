@@ -26,7 +26,7 @@ public class SearchTest {
         assertTrue(Search.binarySearch(9, sortedArrayOdd));
     }
 
-    @Tests
+    @Test
     public void testBinarySearchOddFalse() {
         assertFalse(Search.binarySearch(4, sortedArrayOdd));
     }
