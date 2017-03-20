@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import com.github.ancabanca.interviewprep.sort.Selection;
 import org.junit.Test;
 
 public class SelectionTest {

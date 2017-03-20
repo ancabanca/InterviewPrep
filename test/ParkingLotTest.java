@@ -92,4 +92,14 @@ public class ParkingLotTest {
         lm.freeSpot(s);
         assertEquals(5, lot.freeSpotsCount());
     }
+
+    // Performance test
+    @Test(timeout = 10) // miliseconds
+    public void testParkAndFreeSpot_Performance() throws ParkingLotFullException, NoSpotsForGivenTypeException {
+        Spot s1 = lm.park("medium");
+        Spot s2 = lm.park("medium");
+        Spot s3 = lm.park("small");
+        lm.freeSpot(s1);
+        lm.freeSpot(s3);
+    }
 }
