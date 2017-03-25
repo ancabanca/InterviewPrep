@@ -13,14 +13,15 @@ public class NumberConverter {
     private Set<String> supportedLanguages;
     private String languageISO;
 
-    public NumberConverter(String languageISO, String filename) throws FileNotFoundException {
+    public NumberConverter(String languageISO) throws FileNotFoundException {
         supportedLanguages = new HashSet<String>();
         supportedLanguages.add("en"); // can be read from file / db
         if(!supportedLanguages.contains(languageISO))
             throw new UnsupportedOperationException("Number conversion not supported for language: " + languageISO);
         this.languageISO = languageISO;
         map = new HashMap<Integer,String>();
-        readFromFile(filename);
+        // this can be injected through a config reader
+        readFromFile("src/problems/cfg/" + languageISO + ".cfg");
     }
 
     public String convert(int n) {

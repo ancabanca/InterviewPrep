@@ -10,13 +10,13 @@ public class NumberConverterTest {
 
     @BeforeClass
     public static void setup() throws FileNotFoundException {
-        converter = new NumberConverter("en", "input/en.cfg");
+        converter = new NumberConverter("en");
     }
 
     // exceptions
     @Test(expected = UnsupportedOperationException.class)
     public void testNumberConverter_UnsupportedOperationException_UnsupportedLanguage() throws FileNotFoundException {
-        converter = new NumberConverter("fr", "input/fr.cfg");
+        converter = new NumberConverter("fr");
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -27,11 +27,6 @@ public class NumberConverterTest {
     @Test(expected = UnsupportedOperationException.class)
     public void testNumberConverter_UnsupportedOperationException_UnsupportedNumber_TooBig() throws FileNotFoundException {
         converter.convert(1000000000);
-    }
-
-    @Test(expected = FileNotFoundException.class)
-    public void testNumberConverter_FileNotFoundException() throws FileNotFoundException {
-        converter = new NumberConverter("en", "input/en-US.cfg");
     }
 
     // 0-9
