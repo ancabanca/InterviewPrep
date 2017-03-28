@@ -73,10 +73,19 @@ public class SortTest {
 
     @Test
     public void testShellsortFromFile() throws java.io.IOException {
-        Integer[] randomArrayCopy = Arrays.copyOf(randomArray, randomArray.length);        
+        Integer[] randomArrayCopy = Arrays.copyOf(randomArray, randomArray.length);
         Sort.shellSort(randomArrayCopy);
         assertArrayEquals(sortedArray, randomArrayCopy);
     }
+
+    // shuffle
+    @Test
+    public void testShuffleFromFile() throws java.io.IOException {
+        Integer[] sortedArrayCopy = Arrays.copyOf(sortedArray, sortedArray.length);
+        Sort.shuffle(sortedArrayCopy);
+        assertFalse(Arrays.equals(sortedArray, sortedArrayCopy));
+    }
+
 
     private void generateRandomInts() throws java.io.IOException {
         OutputStreamWriter fw = new OutputStreamWriter
@@ -85,5 +94,41 @@ public class SortTest {
         for (int i = 0; i < 500; i++)
             fw.write(r.nextInt(5000) + "\n");
         fw.close();
+    }
+
+    // three way partition
+    @Test
+    public void testThreeWayPartitionSorted() {
+        Integer[] array = new Integer[] {0,0,1,1,2,2};
+        Sort.threeWayPartition(array);
+        assertArrayEquals(new Integer[] {0,0,1,1,2,2}, array);
+    }
+
+    @Test
+    public void testThreeWayPartitionNotSorted1() {
+        Integer[] array = new Integer[] {0,2,0,0,1,1,2,0,2,1,0};
+        Sort.threeWayPartition(array);
+        assertArrayEquals(new Integer[] {0,0,0,0,0,1,1,1,2,2,2}, array);
+    }
+
+    @Test
+    public void testThreeWayPartitionNotSorted2() {
+        Integer[] array = new Integer[] {0,1,2,0,1,1,2,2,0,1};
+        Sort.threeWayPartition(array);
+        assertArrayEquals(new Integer[] {0,0,0,1,1,1,1,2,2,2}, array);
+    }
+
+    @Test
+    public void testThreeWayPartitionNoTwosSorted() {
+        Integer[] array = new Integer[] {0,0,0,1,1};
+        Sort.threeWayPartition(array);
+        assertArrayEquals(new Integer[] {0,0,0,1,1}, array);
+    }
+
+    @Test
+    public void testThreeWayPartitionNoTwosUnsorted() {
+        Integer[] array = new Integer[] {0,1,0,1,0};
+        Sort.threeWayPartition(array);
+        assertArrayEquals(new Integer[] {0,0,0,1,1}, array);
     }
 }

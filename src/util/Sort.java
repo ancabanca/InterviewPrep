@@ -1,6 +1,7 @@
 package com.github.ancabanca.interviewprep.util;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Sort {
     @SuppressWarnings("unchecked") // Comparable is used raw
@@ -27,6 +28,29 @@ public class Sort {
         while(h >= 1) {
             hSort(array, h);
             h = h / 3;
+        }
+    }
+
+    // sort an array of 0s, 1s and 2s (aka the Dutch National Flag problem)
+    public static void threeWayPartition(Integer[] array) {
+        int low = 0;
+        int mid = 0;
+        int high = array.length - 1;
+
+        while(mid <= high) {
+            if(array[mid] == 0)
+                exchange(array, mid++, low++);
+            else if(array[mid] == 1)
+                mid++;
+            else
+                exchange(array, mid, high--);
+        }
+    }
+
+    public static void shuffle(Comparable[] array) {
+        Random r = new Random();
+        for(int i = 0; i < array.length; i++) {
+            exchange(array, i, r.nextInt(i+1));
         }
     }
 
