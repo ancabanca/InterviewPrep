@@ -78,6 +78,79 @@ public class SortTest {
         assertArrayEquals(sortedArray, randomArrayCopy);
     }
 
+    // mergesort
+    @Test
+    public void testMergesort() {
+        Integer[] array = {7,2,4,9,5,3,7,10,1};
+        Sort.mergesort(array);
+        assertArrayEquals(new Integer[] {1,2,3,4,5,7,7,9,10}, array);
+    }
+
+    @Test
+    public void testMergesortFromFile() throws java.io.IOException {
+        Integer[] randomArrayCopy = Arrays.copyOf(randomArray, randomArray.length);        
+        Sort.mergesort(randomArrayCopy);
+        assertArrayEquals(sortedArray, randomArrayCopy);
+    }
+
+    // quicksort
+    @Test
+    public void testQuicksort() {
+        Integer[] array = {7,2,4,9,5,3,7,10,1};
+        Sort.quicksort(array);
+        assertArrayEquals(new Integer[] {1,2,3,4,5,7,7,9,10}, array);
+    }
+
+    @Test
+    public void testQuicksortDuplicates() {
+        Integer[] array = new Integer[] {0,2,0,0,1,1,2,0,2,1,0};
+        Sort.quicksort(array);
+        assertArrayEquals(new Integer[] {0,0,0,0,0,1,1,1,2,2,2}, array);
+    }
+
+    @Test
+    public void testQuicksortFromFile() throws java.io.IOException {
+        Integer[] randomArrayCopy = Arrays.copyOf(randomArray, randomArray.length);
+        Sort.quicksort(randomArrayCopy);
+        assertArrayEquals(sortedArray, randomArrayCopy);
+    }
+
+    @Test
+    public void testQuicksortFromFileSortedArray() throws java.io.IOException {
+        Integer[] sortedArrayCopy = Arrays.copyOf(sortedArray, sortedArray.length);
+        Sort.quicksort(sortedArrayCopy);
+        assertArrayEquals(sortedArray, sortedArrayCopy);
+    }
+
+    // quickselect
+    @Test
+    public void testQuickselect() {
+        Integer[] array = {7,2,4,9,5,3,7,10,1};
+        Comparable answer = Sort.quickselect(array, 0);
+        assertEquals(new Integer(1), answer);
+    }
+
+    @Test
+    public void testQuickselectDuplicates() {
+        Integer[] array = new Integer[] {0,2,0,0,1,1,2,0,2,1,0};
+        Comparable answer = Sort.quickselect(array, 7);
+        assertEquals(new Integer(1), answer);
+    }
+
+    @Test
+    public void testQuickselectFromFile() throws java.io.IOException {
+        Integer[] randomArrayCopy = Arrays.copyOf(randomArray, randomArray.length);
+        Comparable answer = Sort.quickselect(randomArrayCopy, 233);
+        assertEquals(new Integer(2231), answer);
+    }
+
+    @Test
+    public void testQuickselectFromFileSortedArray() throws java.io.IOException {
+        Integer[] sortedArrayCopy = Arrays.copyOf(sortedArray, sortedArray.length);
+        Comparable answer = Sort.quickselect(sortedArrayCopy, 40);
+        assertEquals(new Integer(378), answer);
+    }
+
     // shuffle
     @Test
     public void testShuffleFromFile() throws java.io.IOException {
