@@ -44,6 +44,7 @@ public class Sort {
         }
     }
 
+    // merge sort
     public static void mergesort(Comparable[] array) {
         Comparable[] aux = new Comparable[array.length];
         mergesort(array, aux, 0, array.length - 1);
@@ -83,6 +84,7 @@ public class Sort {
         }
     }
 
+    // quick sort
     public static void quicksort(Comparable[] array) {
         shuffle(array);
         quicksort(array, 0, array.length-1);
@@ -136,6 +138,7 @@ public class Sort {
                 return mid;
     }
 
+    // quick select
     public static Comparable quickselect(Comparable[] array, int k) {
         shuffle(array);
         if(k < 0 || k > array.length-1)
@@ -174,6 +177,38 @@ public class Sort {
         }
     }
 
+    // heap sort
+    public static void heapsort(Comparable[] array) {
+        int N = array.length;
+        // build max heap
+        for(int i = N/2-1; i >= 0; i--)
+            sink(array, i, array.length-1);
+        // fill sorted elements started with the largest ones
+        while(--N > 0) {
+            array[N] = delMax(array, N);
+        }
+    }
+
+    private static Comparable delMax(Comparable[] array, int N) {
+        Comparable result = array[0];
+        array[0] = array[N];
+        sink(array, 0, N-1);
+        return result;
+    }
+
+    private static void sink(Comparable[] array, int i, int N) {
+        int j = 2*i+1;
+        while(j <= N) {
+            if(j+1 <= N && less(array[j], array[j+1]))
+                j += 1;
+            if(less(array[i], array[j]))
+                exchange(array, i, j);
+            i = j;
+            j = 2*j+1;
+        }
+    }
+
+    // shuffle
     public static void shuffle(Comparable[] array) {
         Random r = new Random();
         for(int i = 0; i < array.length; i++) {

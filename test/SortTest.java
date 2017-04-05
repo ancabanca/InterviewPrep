@@ -122,6 +122,35 @@ public class SortTest {
         assertArrayEquals(sortedArray, sortedArrayCopy);
     }
 
+    // heapsort
+    @Test
+    public void testHeapsort() {
+        Integer[] array = {7,2,4,9,5,3,7,10,1};
+        Sort.heapsort(array);
+        assertArrayEquals(new Integer[] {1,2,3,4,5,7,7,9,10}, array);
+    }
+
+    @Test
+    public void testHeapsortDuplicates() {
+        Integer[] array = new Integer[] {0,2,0,0,1,1,2,0,2,1,0};
+        Sort.heapsort(array);
+        assertArrayEquals(new Integer[] {0,0,0,0,0,1,1,1,2,2,2}, array);
+    }
+
+    @Test
+    public void testHeapsortFromFile() throws java.io.IOException {
+        Integer[] randomArrayCopy = Arrays.copyOf(randomArray, randomArray.length);
+        Sort.heapsort(randomArrayCopy);
+        assertArrayEquals(sortedArray, randomArrayCopy);
+    }
+
+    @Test
+    public void testHeapsortFromFileSortedArray() throws java.io.IOException {
+        Integer[] sortedArrayCopy = Arrays.copyOf(sortedArray, sortedArray.length);
+        Sort.heapsort(sortedArrayCopy);
+        assertArrayEquals(sortedArray, sortedArrayCopy);
+    }
+
     // quickselect
     @Test
     public void testQuickselect() {
