@@ -4,9 +4,21 @@ import com.github.ancabanca.interviewprep.util.MinPQ;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class MinPQTest {
+    private static MinPQ<Integer> pqInts;
+
+    @BeforeClass
+    public static void setup() throws FileNotFoundException {
+        pqInts = new MinPQ<Integer>();
+        Scanner s = new Scanner(new File("test/input/randomInts500.txt"));
+        while(s.hasNextLine()) {
+            pqInts.insert(Integer.parseInt(s.nextLine().trim()));
+        }
+    }
+
     @Test
     public void testMinPQInsertMin() {
         MinPQ<Character> pq = new MinPQ<Character>();
@@ -35,12 +47,7 @@ public class MinPQTest {
 
     @Test
     public void testMinPQFromFile() throws FileNotFoundException {
-        MinPQ<Integer> pq = new MinPQ<Integer>();
-        Scanner s = new Scanner(new File("test/input/randomInts500.txt"));
-        while(s.hasNextLine()) {
-            pq.insert(Integer.parseInt(s.nextLine().trim()));
-        }
-        assertEquals(new Integer(4), pq.min());
+        assertEquals(new Integer(4), pqInts.min());
     }
 
     @Test(expected = IllegalStateException.class)
@@ -67,5 +74,12 @@ public class MinPQTest {
         pq.delMin();
         pq.delMin();
         pq.min();
+    }
+
+    @Test
+    public void testMinPQSample() {
+        for(int i = 0; i < 20; i++)
+            pqInts.sample();
+        // TODO: test uniform distribution
     }
 }

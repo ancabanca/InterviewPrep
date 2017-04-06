@@ -1,5 +1,7 @@
 package com.github.ancabanca.interviewprep.util;
 
+import java.util.Random;
+
 public class MinPQ<K extends Comparable<K>> {
 	private Comparable[] array;
     private int capacity = 16;
@@ -37,8 +39,25 @@ public class MinPQ<K extends Comparable<K>> {
         return array[1];
     }
 
+    public Comparable sample() {
+        int random = new Random().nextInt(N) + 1;
+        return array[random];
+    }
+
+    public Comparable delRandom() {
+        int position = new Random().nextInt(N) + 1;
+        Comparable result = array[position];
+        array[position] = array[N--];
+        sink(position);
+        return result;
+    }
+
     public boolean isEmpty() {
         return N == 0;
+    }
+
+    public int size() {
+        return N;
     }
 
     private void swim(int k) {
