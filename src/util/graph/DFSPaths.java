@@ -1,15 +1,15 @@
-package com.github.ancabanca.interviewprep.util;
+package com.github.ancabanca.interviewprep.util.graph;
 
 import java.util.LinkedList;
 import java.util.Stack;
 
-public class GraphPaths {
+public class DFSPaths {
     private int       s;
     private Graph     g;
     private boolean[] visited;
     private int[]     pathTo;
 
-    public GraphPaths(Graph g, int s) {
+    public DFSPaths(Graph g, int s) {
         this.g  = g;
         this.s  = s;
         visited = new boolean[g.V()];

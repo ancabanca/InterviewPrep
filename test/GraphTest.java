@@ -1,7 +1,8 @@
 import static org.junit.Assert.*;
 
-import com.github.ancabanca.interviewprep.util.Graph;
-import com.github.ancabanca.interviewprep.util.GraphPaths;
+import com.github.ancabanca.interviewprep.util.graph.CC;
+import com.github.ancabanca.interviewprep.util.graph.DFSPaths;
+import com.github.ancabanca.interviewprep.util.graph.Graph;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -9,8 +10,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class GraphTest {
-    private static Graph      simpleGraph;
-    private static GraphPaths simpleGraphPaths;
+    private static Graph    simpleGraph;
+    private static DFSPaths simpleGraphPaths;
+    private static CC cc;
 
     @BeforeClass
     public static void setup() {
@@ -21,7 +23,9 @@ public class GraphTest {
         simpleGraph.addEdge(3,4);
         simpleGraph.addEdge(4,5);
 
-        simpleGraphPaths = new GraphPaths(simpleGraph, 1);
+        simpleGraphPaths = new DFSPaths(simpleGraph, 1);
+
+        cc = new CC(simpleGraph);
     }
 
     @Test
@@ -47,5 +51,12 @@ public class GraphTest {
         Iterable<Integer> path = simpleGraphPaths.pathTo(5);
         for(int p : path)
             assertEquals(a[i++], p);
+    }
+
+    @Test
+    public void testGraphCC() {
+        assertEquals(2, cc.count());
+        assertTrue (cc.connected(1,3));
+        assertFalse(cc.connected(1,0));
     }
 }

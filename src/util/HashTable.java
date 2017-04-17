@@ -30,6 +30,9 @@ public class HashTable<K,V> {
 
     public void remove(K key) {
         int hash = key.hashCode() % M;
+        if(table[hash] != null)
+            if(table[hash].key.equals(key))
+                ;
     }
 
     private static class Node {

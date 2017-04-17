@@ -1,4 +1,4 @@
-package com.github.ancabanca.interviewprep.util;
+package com.github.ancabanca.interviewprep.util.graph;
 
 import java.io.File;
 import java.io.FileNotFoundException;
