@@ -100,7 +100,7 @@
     <!-- ###################################################
         Runs tests
         ################################################### -->
-    <target name="test" depends="compile, checkstyle, findbugs">
+    <target name="test" depends="compile"> <!--, checkstyle, findbugs"-->
         <junit printsummary="on" haltonfailure="yes">
             <classpath>
                 <path refid="test.classpath" />
@@ -139,11 +139,11 @@
     <!-- ###################################################
         Main target
         ################################################### -->
-    <target name="main" depends="test"> <!-- also: jar, docs -->
+    <target name="main" depends="compile"> <!-- also: jar, docs -->
         <description>Main target</description>
-        <java classname="PercolationStats" classpathref="runtime.classpath">
-            <arg value="10"/>
-            <arg value="100"/>
-        </java>
+       <!-- <java classname="com.github.ancabanca.interviewprep.ood.coffeemaker.Main" classpathref="runtime.classpath">
+            <!-- <arg value="10"/>
+            <arg value="100"/> --
+        </java>-->
     </target>
 </project>
